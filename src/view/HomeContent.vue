@@ -1,13 +1,9 @@
 <template>
 <div class="home">
-    <NavBar />
     <div class="max-width">
+        <NavBar />
         <HeroContent />
     </div>
-    
-    <p>
-        home
-    </p>
 </div>
 </template>
 
@@ -28,7 +24,7 @@ export default {
 .home{
 
     .max-width{
-        padding: 10px 80px;
+        padding: 10px 120px;
     }
 }
 </style>
