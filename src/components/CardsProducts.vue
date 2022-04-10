@@ -4,7 +4,12 @@
         <img :src=" '../assets/img/' + product.gambar " alt="...">
         <!-- <img src="../assets/img/nasi-rames.jpg" alt=""> -->
         <div class="info">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti ab perspiciatis soluta rem libero deserunt! Sit aut du
+            <div class="title">
+                {{ product.nama }}
+            </div>
+            <div class="price">
+                harga: {{ product.harga}}
+            </div>
         </div>
     </div>
 </div>
@@ -27,12 +32,21 @@ export default {
     .cards{
         position: relative;
         width: 250px;
+        height: 300px;
+        // border: 2px solid #000;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: rgba(0, 0, 0, 0.537) 0px 3px 12px;
 
         img{
             width: 100%;
         }
 
         .info{
+            
+            .title{
+                padding: 15px 0;
+            }
         }
     }
 }
