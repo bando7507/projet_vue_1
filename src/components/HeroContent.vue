@@ -4,7 +4,7 @@
             <div class="col">
                 <h2><span>Delicious Food Menu, </span> <br> in Your Gadget</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <router-link to="/" class="link"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>Pesan
+                <router-link to="/Foods" class="link"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>Pesan
                 </router-link>
             </div>
             <div class="col-1">
@@ -19,7 +19,7 @@
             <div class="col">
                 <h2><span>Delicious Food Menu, </span> <br> in Your Gadget</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <router-link to="/" class="link"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>Pesan
+                <router-link to="/Foods" class="link"><i class="fa fa-long-arrow-right" aria-hidden="true"></i>Pesan
                 </router-link>
             </div>
         </div>
@@ -86,7 +86,12 @@
                 padding: 15px;
                 background: #00d068;
                 border-radius: 10px;
-                color: #000;
+                color: #fff;
+
+                i{
+                    color: #fff;
+                    padding-right: 10px;
+                }
             }
         }
 

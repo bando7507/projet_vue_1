@@ -8,7 +8,7 @@
             <div class="text-1">
                 Best <strong>Foods</strong>
             </div>
-            <router-link class="link" to="/">more...</router-link>
+            <router-link class="link" to="/" ><i class="fa fa-eye" aria-hidden="true"></i>more...</router-link>
         </div>
 
         <div class="max-width3">
@@ -45,28 +45,10 @@
             }
         },
 
-        // mounted() {
-        //     axios.get('http://localhost:3000/best-products')
-
-
-        //         .then(function (response) {
-        //             // handle success
-        //             // console.log("okeuu : ", response);
-        //             this.setProduct(response.data);
-
-        //          })
-        //         .catch(function (error) {
-        //             // handle error
-        //             console.log(" onvepas : ", error);
-        //         })
-
-        // }
-
         mounted() {
             axios
                 .get("http://localhost:3000/best-products")
                 .then((response) => this.setProduct(response.data))
-
                 .catch((error) => console.log(error))
 
 
@@ -79,7 +61,7 @@
     .home {
         
         .max-width {
-            padding: 20px 120px;
+            padding: 30px 120px 0 120px;
         }
 
         .max-width2 {
@@ -98,12 +80,20 @@
                 background: #00d068;
                 color: #fff;
                 border-radius: 10px;
+                
+                i{
+                    color: #fff;
+                    padding-right: 10px;
+                }
             }
 
         }
 
         .max-width3 {
             display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
     }
