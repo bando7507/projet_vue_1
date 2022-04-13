@@ -18,20 +18,20 @@
                 </ul>
             </nav>
             <transition name="fade">
-            <div class="drop" v-show="moible">
-                <nav>
-                    <div>
-                        <i class="fa fa-align-justify" @click="Not"></i>
-                    </div>
+                <div class="drop" v-show="moible">
+                    <nav>
+                        <div>
+                            <i class="fa fa-align-justify" @click="Not"></i>
+                        </div>
 
-                    <div>
-                        <router-link class="link" to="/">Home</router-link>
-                    </div>
+                        <div>
+                            <router-link class="link" to="/">Home</router-link>
+                        </div>
 
-                    <div>
-                         <router-link class="link" to="/Foods">Foods</router-link>
-                    </div>
-                    <!-- <ul>
+                        <div>
+                            <router-link class="link" to="/Foods">Foods</router-link>
+                        </div>
+                        <!-- <ul>
                         <li>
                             <i class="fa fa-align-justify" @click="Not"></i>
                         </li>
@@ -43,14 +43,14 @@
                         </li>
                         
                     </ul> -->
-                </nav>
-            </div>
+                    </nav>
+                </div>
             </transition>
             <div class="logo">
-                <router-link class="link" to="/" v-show="!navmobile">
+                <router-link class="link" to="/KeranJang" v-show="!navmobile">
                     Keranjang
                     <i class="fa fa-briefcase" aria-hidden="true"></i>
-                    <span class="plus">0</span>
+                    <span class="plus">{{updateLen ? updateLen.lenght : jumlah_pesanams.length}}</span>
                 </router-link>
                 <i class="fa fa-align-justify" v-show="navmobile" @click="Nva"></i>
             </div>
@@ -59,37 +59,55 @@
 </template>
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: 'NavBar',
         data() {
             return {
                 moible: null,
                 navmobile: null,
-                sreenWidth: null
+                sreenWidth: null,
+
+                jumlah_pesanams: []
             }
         },
+        props:{
+            updateLen : Array
+        },
 
-        created(){
+        created() {
             window.addEventListener('resize', this.screenCheck)
             this.screenCheck()
         },
         methods: {
-            Nva(){
+            Nva() {
                 this.moible = true
             },
-            Not(){
+            Not() {
                 this.moible = false
             },
-            screenCheck(){
+            screenCheck() {
                 this.sreenWidth = innerWidth
-                if( this.sreenWidth <= 850){
+                if (this.sreenWidth <= 850) {
                     this.navmobile = true
                     return;
                 }
                 this.navmobile = false
                 return;
+            },
+
+            setJumlah(data) {
+                this.jumlah_pesanams = data
             }
 
+        },
+
+        mounted() {
+            axios
+                .get("http://localhost:3000/keranjangs")
+                .then((response) => this.setJumlah(response.data))
+                .catch((error) => console.log(error))
         }
 
     }
@@ -132,9 +150,11 @@
 
                     .plus {
                         margin-left: 10px;
-                        padding: 3px;
+                        padding: 4px;
                         border-radius: 3px;
                         background: #00d068;
+                        color: #fff;
+                        font-size: 12px;
 
                     }
                 }
@@ -150,11 +170,11 @@
                 padding: 20px 30px;
                 box-shadow: rgba(0, 0, 0, 0.537) 0px 3px 12px;
 
-                nav{
-                    div{
+                nav {
+                    div {
                         padding: 10px;
 
-                        .link{
+                        .link {
                             text-decoration: none;
                         }
                     }

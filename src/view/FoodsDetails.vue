@@ -28,18 +28,19 @@
                     <div class="price">
                         harga : <strong>Pr.</strong> {{product.harga}}
                     </div>
-                    <form action="">
-                        <label for="">
+                    <form action="" v-on:submit.prevent>
+                        <label for="jumlah_pemesanan">
                             Jumlah Pesan
                         </label>
-                        <input type="text">
+                        <input type="number" v-model="pesan.jumlah_pemesanan">
 
-                        <label for="">
+                        <label for="keterangan">
                             Keterangan
                         </label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="" id="" cols="30" rows="10" v-model="pesan.keterangan"></textarea>
 
-                        <button class="btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Buy...</button>
+                        <button type="submit" class="btn" @click="pemesanan"><i class="fa fa-shopping-cart"
+                                aria-hidden="true"></i>Buy...</button>
                     </form>
                 </div>
             </div>
@@ -59,14 +60,41 @@
 
         data() {
             return {
-                product: {}
+                product: {},
+                pesan: {}
 
             }
         },
 
         methods: {
-            setProduc(data) {
+            setProduct(data) {
                 this.product = data
+            },
+
+            pemesanan() {
+                if (this.pesan.jumlah_pemesanan) {
+                    this.pesan.products = this.product
+                    axios
+                        .post("http://localhost:3000/keranjangs", this.pesan)
+                        .then(() => {
+                            this.$router.push({ path : '/KeranJang'})
+                            this.$toast.success("coool", {
+                                type: "success",
+                                position: "top-right",
+                                duration: 1000,
+                                dismissible: true
+
+                            })
+                        })
+                }
+                else{
+                    this.$toast.error("commande d abord", {
+                        type: "error",
+                        position: "top-right",
+                        duration: 1000,
+                        dismissible: true
+                    })
+                }
             }
         },
 
@@ -74,7 +102,7 @@
 
             axios
                 .get("http://localhost:3000/products/" + this.$route.params.id)
-                .then((response) => this.setProduc(response.data))
+                .then((response) => this.setProduct(response.data))
                 .catch((error) => console.log(error))
         }
 
@@ -115,7 +143,7 @@
                 padding: 20px 0;
 
                 .img {
-                    img{
+                    img {
                         border-radius: 15px;
                         width: 600px;
                         height: 400px;
@@ -124,6 +152,7 @@
 
                 .info {
                     width: 50%;
+
                     .name {
                         font-size: 2.5rem;
 
@@ -155,15 +184,15 @@
 
                         input {
                             width: 100%;
-                            border:1px solid #eee ;
+                            border: 1px solid #eee;
                             border-radius: 15px;
                             padding: 10px;
                             outline: none;
                             box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
                             transition: .5s all;
 
-                            &:focus{
-                                border-color:#00d068 ;
+                            &:focus {
+                                border-color: #00d068;
                             }
                         }
 
@@ -171,18 +200,18 @@
                             width: 100%;
                             padding: 10px;
                             height: 65px;
-                            border:1px solid #eee ;
+                            border: 1px solid #eee;
                             outline: none;
                             border-radius: 15px;
                             box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
                             transition: .5s all;
 
-                              &:focus{
-                                border-color:#00d068 ;
+                            &:focus {
+                                border-color: #00d068;
                             }
                         }
 
-                        .btn{
+                        .btn {
                             margin-top: 20px;
                             border: none;
                             font-size: 20px;
@@ -193,11 +222,11 @@
                             transition: .4s all;
                             color: #fff;
 
-                            &:hover{
+                            &:hover {
                                 background: none;
                             }
 
-                            i{
+                            i {
                                 color: #fff;
                                 padding-right: 10px;
                                 font-size: 25px;
